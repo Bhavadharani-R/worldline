@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Student Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Student Registration Form</h2>
+      <form name="registrationForm">
+        <label for="firstname">First Name:</label>
+			<input type="text" id="firstname" name="firstname" value="oo" required>
+
+			<label for="lastname">Last Name:</label>
+			<input type="text" id="lastname" name="lastname" value="oo" required>
+
+			<label for="emailid">Email:</label>
+			<input type="email" id="emailid" name="emailid" value="oo@k.co" required>
+
+			<label for="phoneno">Phone Number:</label>
+			<input type="tel" id="phoneno" name="phoneno" value="564654654654">
+
+			<label for="dob">Date of Birth:</label>
+			<input type="date" id="dob" name="dob" value="2020-02-04" required>
+
+			<label for="gender">Gender:</label>
+			<select id="gender" name="gender" required>
+				<option value="">Select gender</option>
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+				<option value="other">Other</option>
+			</select>
+
+			<label for="address1">Address Line 1:</label>
+			<input type="text" id="address1" name="address1" value="oo" required>
+
+			<label for="address2">Address Line 2:</label>
+			<input type="text" id="address2" value="oo" name="address2">
+
+			<label for="city">City:</label>
+			<input type="text" id="city" value="oo" name="city" required>
+
+			<label for="state"value="oo">State:</label>
+			<input type="text" id="state" name="state" required>
+
+			<label for="zipcode">Zipcode:</label>
+			<input type="text" id="zipcode" value="oo" name="zipcode">
+
+			<label for="country">Country:</label>
+			<input type="text" id="country" value="oo" name="country" required>
+            <button  >Submit</button>
+      </form>
+    </div>
+    <!-- <script src="script.js"></script> -->
+	<script>
+    	var firstName = document.getElementById("firstName").value;
+var lastName = document.getElementById("lastName").value;
+var email = document.getElementById("email").value;
+var phone = document.getElementById("phone").value;
+var dob = document.getElementById("dob").value;
+var gender = document.getElementById("gender").value;
+var address1 = document.getElementById("address1").value;
+var city = document.getElementById("city").value;
+var state = document.getElementById("state").value;
+var zip = document.getElementById("zip").value;
+var country = document.getElementById("country").value;
+
+    var jsonData = {
+      "fname": firstName,
+      "lname": lastName,
+      "mail": email,
+      "pno": phone,
+      "dob": dob,
+      "gend": gender,
+      "address1": address1,
+      "address2": address2,
+      "city": city,
+      "state": state,
+      "zip": zip,
+      "country": country
+    };
+
+    document.getElementById("registrationForm").addEventListener("submit",function(event){
+      event.preventDefault();
+      const formData = new FormData(this);
+			fetch("http://127.0.0.1:5000/send", {
+				method: "POST",
+				body: jsonData
+			}).then(response => {
+				console.log(response);
+				alert("Form submitted successfully!");
+			}).catch(error => {
+				console.error(error);
+				alert("Form submission failed.");
+			});
+    })
+
+// 		function validateForm() {
+//   console.log(document.getElementById("firstName").value)
+//     // var firstName = document.forms["registrationForm"]["firstName"].value;
+//     // var lastName = document.forms["registrationForm"]["lastName"].value;
+//     // var email = document.forms["registrationForm"]["email"].value;
+//     // var phone = document.forms["registrationForm"]["phone"].value;
+//     // var dob = document.forms["registrationForm"]["dob"].value;
+//     // var gender = document.forms["registrationForm"]["gender"].value;
+//     // var address1 = document.forms["registrationForm"]["address1"].value;
+//     // var city = document.forms["registrationForm"]["city"].value;
+//     // var state = document.forms["registrationForm"]["state"].value;
+//     // var zip = document.forms["registrationForm"]["zip"].value;
+//     // var country = document.forms["registrationForm"]["country"].value;
+
+//     // if (firstName == "") {
+//     //   alert("First name must be filled out");
+//     //   return false;
+//     // }
+    
+//     // if (lastName == "") {
+//     //   alert("Last name must be filled out");
+//     //   return false;
+//     // }
+    
+//     // if (email == "") {
+//     //   alert("Email must be filled out");
+//     //   return false;
+//     // }
+    
+//     // if (phone == "") {
+//     //   alert("Phone number must be filled out");
+//     //   return false;
+//     // }
+
+//     // if (dob == "") {
+//     //   alert("Date of birth must be filled out");
+//     //   return false;
+//     // }
+    
+//     // if (gender == "") {
+//     //   alert("Gender must be selected");
+//     //   return false;
+//     // }
+    
+//     // if (address1 == "") {
+//     //   alert("Address 1 must be filled out");
+//     //   return false;
+//     // }
+    
+//     // if (city == "") {
+//     //   alert("City must be filled out");
+//     //   return false;
+//     // }
+    
+//     // if (state == "") {
+//     //   alert("State must be filled out");
+//     //   return false;
+//     // }
+    
+//     // if (zip == "") {
+//     //   alert("Zip code must be filled out");
+//     //   return false;
+//     // }
+    
+//     // if (country == "") {
+//     //   alert("Country must be filled out");
+//     //   return false;
+//     // }
+
+//     fetch("http://127.0.0.1:5000/send", {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json"
+//   },
+//   body: JSON.stringify(jsonData)
+// })
+// .then(response => {
+//   if (response.ok) {
+//     console.log("JSON file sent successfully.");
+//   } else {
+//     console.error("Error sending JSON file.");
+//   }
+// })
+// .catch(error => {
+//   console.error("Error sending JSON file:", error);
+// });
+//   }
+  
+
+	</script>
+  </body>
+</html>
